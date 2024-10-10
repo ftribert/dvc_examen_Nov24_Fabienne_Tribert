@@ -1,5 +1,4 @@
 # local package
--e .
 
 # external requirements
 click
@@ -17,3 +16,11 @@ imbalanced-learn
 joblib
 #sys
 json
+
+
+# othor
+
+pandas 
+sklearn
+os
+pickle

@@ -1,0 +1,39 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python src/data/make_dataset.py
+    deps:
+    - path: src/data/make_dataset.py
+      hash: md5
+      md5: db470746fd27f45453efc7db4e4cf3eb
+      size: 89
+    outs:
+    - path: data/processed_data
+      hash: md5
+      md5: 87e94badc1b201ce8042e28da4eaf656.dir
+      size: 579022
+      nfiles: 6
+  train:
+    cmd: python src/models/all_train.py
+    deps:
+    - path: src/models/all_train.py
+      hash: md5
+      md5: 1e6d802c1ccf638bb405d6d7b564d377
+      size: 122
+    outs:
+    - path: models/best_decision_tree_model.pkl
+      hash: md5
+      md5: 66a67926db3f869cb1a6588f768f5964
+      size: 5486
+  metrics:
+    cmd: python src/models/evaluation.py
+    deps:
+    - path: src/models/evaluation.py
+      hash: md5
+      md5: f4969166d393f6c3364ac66f97061778
+      size: 1381
+    outs:
+    - path: metrics/scores.json
+      hash: md5
+      md5: ce502f89d4d73b6e0450045fd0ed0042
+      size: 54

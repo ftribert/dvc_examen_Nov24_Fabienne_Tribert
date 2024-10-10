@@ -3,12 +3,12 @@ import pickle
 import json
 from sklearn.metrics import mean_squared_error, r2_score
 
-def evaluation(X_test_path='../../data/processed_data/X_test_scaled.csv', 
-               y_test_path='../../data/processed_data/y_test.csv',
-               model_path='../../models/trained_decision_tree_model.pkl', 
-               predictions_path='../../data/predictions.csv', 
-               metrics_path='../../metrics/scores.json'):
-    
+def evaluation(X_test_path='data/processed_data/X_test_scaled.csv', 
+               y_test_path='data/processed_data/y_test.csv',
+               model_path='models/trained_decision_tree_model.pkl', 
+               predictions_path='data/predictions.csv', 
+               metrics_path='metrics/scores.json'):
+
     # Chargement des données
     X_test = pd.read_csv(X_test_path)
     y_test = pd.read_csv(y_test_path)
@@ -35,6 +35,4 @@ def evaluation(X_test_path='../../data/processed_data/X_test_scaled.csv',
 
     print(f"Prédictions sauvegardées dans {predictions_path}")
     return    print(f"Métriques d'évaluation sauvegardées dans {metrics_path}")
-
-
 evaluation()

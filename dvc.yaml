@@ -1,0 +1,19 @@
+stages:
+  prepare:
+    cmd: python src/data/make_dataset.py
+    deps:
+    - src/data/make_dataset.py
+    outs:
+    - data/processed_data
+  train:
+    cmd: python src/models/all_train.py
+    deps:
+    - src/models/all_train.py
+    outs:
+    - models/best_decision_tree_model.pkl
+  metrics:
+    cmd: python src/models/evaluation.py
+    deps:
+    - src/models/evaluation.py
+    outs:
+    - metrics/scores.json
