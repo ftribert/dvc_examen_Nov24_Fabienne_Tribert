@@ -4,6 +4,7 @@
 # external requirements
 click
 Sphinx
+dvc
 coverage
 #awscli>=1.29.0
 flake8
