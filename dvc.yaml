@@ -1,19 +1,53 @@
 stages:
-  prepare:
-    cmd: python src/data/make_dataset.py
+  split:
+    cmd: python src/data/split.py
     deps:
-    - src/data/make_dataset.py
+    - data/raw_data/raw.csv
+    - src/data/split.py  
     outs:
-    - data/processed_data
-  train:
-    cmd: python src/models/all_train.py
+    - data/processed_data/X_train.csv
+    - data/processed_data/X_test.csv
+    - data/processed_data/y_train.csv
+    - data/processed_data/y_test.csv
+
+  noramlize:
+    cmd: python src/data/normalize.py
     deps:
-    - src/models/all_train.py
+    - python src/data/normalize.py
+    - data/processed_data/X_train.csv
+    outs:
+    - data/processed_data/X_train_scaled.csv
+    - data/processed_data/X_test_scaled.csv
+
+
+  gridsearch:
+    cmd: python src/models/grid_seach.py
+    deps:
+    - src/models/grid_seach.py
+    - data/processed_data/X_train_scaled.csv
+    - data/processed_data/X_test.csv
+    - data/processed_data/y_train.csv
     outs:
     - models/best_decision_tree_model.pkl
-  metrics:
+  
+  train:
+    cmd: python src/model/train.py 
+    deps:
+    - data/processed_data/X_train_scaled.csv
+    - data/processed_data/X_test.csv
+    - models/best_decision_tree_model.pkl
+    - src/model/train.py
+    outs:
+    - models/trained_decision_tree_model.pkl
+
+  evaluate:
     cmd: python src/models/evaluation.py
     deps:
     - src/models/evaluation.py
+    - models/trained_decision_tree_model.pkl
+    - data/processed_data/X_test.csv
+    - data/processed_data/X_test_scaled.csv
+
     outs:
     - metrics/scores.json
+    - data/predication.csv
