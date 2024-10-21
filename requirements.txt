@@ -23,3 +23,4 @@ pandas
 sklearn
 os
 pickle
+pip install scikit-learn

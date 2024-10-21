@@ -14,17 +14,29 @@ stages:
       size: 579022
       nfiles: 6
   train:
-    cmd: python src/models/all_train.py
+    cmd: python src/models/train.py
     deps:
-    - path: src/models/all_train.py
+    - path: data/processed_data/X_test.csv
       hash: md5
-      md5: 1e6d802c1ccf638bb405d6d7b564d377
-      size: 122
-    outs:
+      md5: 3650992347abd32b2cd42bde8906b31f
+      size: 52989
+    - path: data/processed_data/X_train_scaled.csv
+      hash: md5
+      md5: be404ef96c19bd97f98a6889f27095d1
+      size: 228951
     - path: models/best_decision_tree_model.pkl
       hash: md5
-      md5: 66a67926db3f869cb1a6588f768f5964
-      size: 5486
+      md5: 891c1bc6f71092bebfd23e58f7daa423
+      size: 5470
+    - path: src/models/train.py
+      hash: md5
+      md5: ca3a3e47b5f88a66a7b3c6a67d3f35c6
+      size: 1024
+    outs:
+    - path: models/trained_decision_tree_model.pkl
+      hash: md5
+      md5: 2c5c7088ea415af1213762e950d08a82
+      size: 5480
   metrics:
     cmd: python src/models/evaluation.py
     deps:
@@ -33,6 +45,106 @@ stages:
       md5: f4969166d393f6c3364ac66f97061778
       size: 1381
     outs:
+    - path: metrics/scores.json
+      hash: md5
+      md5: ce502f89d4d73b6e0450045fd0ed0042
+      size: 54
+  split:
+    cmd: python src/data/split.py
+    deps:
+    - path: data/raw_data/raw.csv
+      hash: md5
+      md5: c5fa8108b555440cd8bd663525d6e984
+      size: 335570
+    - path: src/data/split.py
+      hash: md5
+      md5: 7bf4d78b87141d59d8beccdf4efb919e
+      size: 1037
+    outs:
+    - path: data/processed_data/X_test.csv
+      hash: md5
+      md5: 3650992347abd32b2cd42bde8906b31f
+      size: 52989
+    - path: data/processed_data/X_train.csv
+      hash: md5
+      md5: 10b9624259cdef969e3830e4f6c0c4c3
+      size: 210922
+    - path: data/processed_data/y_test.csv
+      hash: md5
+      md5: 3738f93f228b4914c0c48ba6a9c35298
+      size: 6821
+    - path: data/processed_data/y_train.csv
+      hash: md5
+      md5: a9f6c4c8eba38f4177a8cfac86d19e97
+      size: 27405
+  noramlize:
+    cmd: python src/data/normalize.py
+    deps:
+    - path: data/processed_data/X_train.csv
+      hash: md5
+      md5: 10b9624259cdef969e3830e4f6c0c4c3
+      size: 210922
+    - path: src/data/normalize.py
+      hash: md5
+      md5: 5d8acece0f2f707f3eee496d9f5224e4
+      size: 1135
+    outs:
+    - path: data/processed_data/X_test_scaled.csv
+      hash: md5
+      md5: eb33f401380d429e1f212e5f38cdcc5f
+      size: 57391
+    - path: data/processed_data/X_train_scaled.csv
+      hash: md5
+      md5: be404ef96c19bd97f98a6889f27095d1
+      size: 228951
+  gridsearch:
+    cmd: python src/models/grid_seach.py
+    deps:
+    - path: data/processed_data/X_test.csv
+      hash: md5
+      md5: 3650992347abd32b2cd42bde8906b31f
+      size: 52989
+    - path: data/processed_data/X_train_scaled.csv
+      hash: md5
+      md5: be404ef96c19bd97f98a6889f27095d1
+      size: 228951
+    - path: data/processed_data/y_train.csv
+      hash: md5
+      md5: a9f6c4c8eba38f4177a8cfac86d19e97
+      size: 27405
+    - path: src/models/grid_seach.py
+      hash: md5
+      md5: f0b2f9950eae537f9716cf5cbb6d9983
+      size: 1447
+    outs:
+    - path: models/best_decision_tree_model.pkl
+      hash: md5
+      md5: 891c1bc6f71092bebfd23e58f7daa423
+      size: 5470
+  evaluate:
+    cmd: python src/models/evaluation.py
+    deps:
+    - path: data/processed_data/X_test.csv
+      hash: md5
+      md5: 3650992347abd32b2cd42bde8906b31f
+      size: 52989
+    - path: data/processed_data/X_test_scaled.csv
+      hash: md5
+      md5: eb33f401380d429e1f212e5f38cdcc5f
+      size: 57391
+    - path: models/trained_decision_tree_model.pkl
+      hash: md5
+      md5: 2c5c7088ea415af1213762e950d08a82
+      size: 5480
+    - path: src/models/evaluation.py
+      hash: md5
+      md5: 552f9e5bf71e1a7f1a721156352a62c6
+      size: 1421
+    outs:
+    - path: data/predictions.csv
+      hash: md5
+      md5: 6768a8b5bf6cd58ccfab55e7f84c5660
+      size: 13531
     - path: metrics/scores.json
       hash: md5
       md5: ce502f89d4d73b6e0450045fd0ed0042

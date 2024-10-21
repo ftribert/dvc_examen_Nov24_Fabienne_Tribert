@@ -26,6 +26,9 @@ def Splite(Data_Raw = pd.read_csv('data/raw_data/raw.csv')):
     y_train.to_csv(os.path.join(path, 'y_train.csv'), index=False)
     y_test.to_csv(os.path.join(path, 'y_test.csv'), index=False)
 
+    print ("La création des fichier train et test s'est bien éfféctuée avec une repartition de 80/20%.")
 
-    return print ("La création des fichier train et test s'est bien éfféctuée avec une repartition de 80/20%.")
+    return 
+
+Splite()
 

@@ -35,4 +35,5 @@ def evaluation(X_test_path='data/processed_data/X_test_scaled.csv',
 
     print(f"Prédictions sauvegardées dans {predictions_path}")
     return    print(f"Métriques d'évaluation sauvegardées dans {metrics_path}")
+
 evaluation()

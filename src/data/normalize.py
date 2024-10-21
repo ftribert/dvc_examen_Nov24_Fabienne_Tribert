@@ -26,3 +26,4 @@ def normalize_data(X_train_path='data/processed_data/X_train.csv', X_test_path='
 
     return print("Normalisation des données effectuée et fichiers sauvegardés.")
 
+normalize_data()

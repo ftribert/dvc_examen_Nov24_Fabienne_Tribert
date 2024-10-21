@@ -13,7 +13,7 @@ stages:
   noramlize:
     cmd: python src/data/normalize.py
     deps:
-    - python src/data/normalize.py
+    - src/data/normalize.py
     - data/processed_data/X_train.csv
     outs:
     - data/processed_data/X_train_scaled.csv
@@ -31,12 +31,12 @@ stages:
     - models/best_decision_tree_model.pkl
   
   train:
-    cmd: python src/model/train.py 
+    cmd: python src/models/train.py 
     deps:
     - data/processed_data/X_train_scaled.csv
     - data/processed_data/X_test.csv
     - models/best_decision_tree_model.pkl
-    - src/model/train.py
+    - src/models/train.py
     outs:
     - models/trained_decision_tree_model.pkl
 
@@ -50,4 +50,4 @@ stages:
 
     outs:
     - metrics/scores.json
-    - data/predication.csv
+    - data/predictions.csv

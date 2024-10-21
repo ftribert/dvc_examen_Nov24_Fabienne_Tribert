@@ -35,4 +35,4 @@ def grid_search_decision_tree(X_train_path='data/processed_data/X_train_scaled.c
 
     return print(f"Meilleur modèle sauvegardé dans {models_path}/best_decision_tree_model.pkl")
 
-
+grid_search_decision_tree()
