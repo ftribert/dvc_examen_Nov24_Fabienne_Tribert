@@ -15,6 +15,7 @@ stages:
     deps:
     - src/data/normalize.py
     - data/processed_data/X_train.csv
+    - data/processed_data/X_test.csv
     outs:
     - data/processed_data/X_train_scaled.csv
     - data/processed_data/X_test_scaled.csv
