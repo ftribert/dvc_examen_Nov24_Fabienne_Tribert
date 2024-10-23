@@ -40,7 +40,7 @@ stages:
     outs:
     - models/trained_decision_tree_model.pkl
   
-    evaluate:
+  evaluate:
     cmd: python src/models/evaluation.py
     deps:
     - src/models/evaluation.py
@@ -50,4 +50,5 @@ stages:
     - data/processed_data/X_test_scaled.csv
     outs:
     - data/predictions.csv
+    metrics:
     - metrics/scores.json
