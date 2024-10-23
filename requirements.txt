@@ -1,0 +1,26 @@
+# local package
+
+# external requirements
+click
+Sphinx
+dvc
+coverage
+#awscli>=1.29.0
+flake8
+pandas
+#logging
+numpy 
+pathlib 
+scikit-learn
+imbalanced-learn
+joblib
+#sys
+json
+pandas 
+# othor
+
+pandas 
+sklearn
+os
+pickle
+pip install scikit-learn
