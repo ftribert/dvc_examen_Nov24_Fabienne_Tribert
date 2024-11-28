@@ -1,4 +1,0 @@
-[core]
-    remote = myremote
-['remote "myremote"']
-    url = https://dagshub.com/ftribert/dvc_examen_Nov24_Fabienne_Tribert.dvc
