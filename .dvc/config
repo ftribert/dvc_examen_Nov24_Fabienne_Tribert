@@ -1,3 +1,8 @@
-[remote "myremote"]
-    url = git@dagshub.com:ftribert/dvc_examen_Nov24_Fabienne_Tribert.git
+[core]
+    remote = myremote
+
+['remote "myremote"']
+    url = https://dagshub.com/ftribert/dvc_examen_Nov24_Fabienne_Tribert.dvc
+    auth = basic
+
 
